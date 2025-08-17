@@ -1,0 +1,22 @@
+F:\Games\steamapps\common\RimWorld\Mods\GermanQuality\Source\GermanQuality\GermanQuality\bin\Debug\GermanQuality.dll
+F:\Games\steamapps\common\RimWorld\Mods\GermanQuality\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csprojAssemblyReference.cache
+F:\Games\steamapps\common\RimWorld\Mods\GermanQuality\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csproj.CoreCompileInputs.cache
+F:\Games\steamapps\common\RimWorld\Mods\GermanQuality\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.dll
+F:\Games\steamapps\common\RimWorld\Mods\GermanQuality\Assemblies\GermanQuality.dll
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250716\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csproj.AssemblyReference.cache
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250716\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csproj.CoreCompileInputs.cache
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250716\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csproj.AssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\GermanQuality\GermanQuality\obj\Debug\GermanQuality.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Assemblies\GermanQuality.dll
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250716\Source\Assemblies\GermanQuality.dll
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250716\Assemblies\GermanQuality.dll
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250716\QualityAffectsHP\Assemblies\GermanQuality.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\QualityAffectsHP\Assemblies\GermanQuality.dll
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250716\Source\GermanQuality\GermanQuality\obj\Debug\GermanQu.6D0AAC34.Up2Date
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\QualityAffectsHP\1.6\Assemblies\GermanQuality.dll
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250813\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csproj.AssemblyReference.cache
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250813\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csproj.CoreCompileInputs.cache
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250813\Source\GermanQuality\GermanQuality\obj\Debug\GermanQu.6D0AAC34.Up2Date
+H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250813\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.dll

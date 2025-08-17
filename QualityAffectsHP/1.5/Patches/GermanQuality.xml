@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/StatDef[defName="MaxHitPoints"]/parts</xpath>
+		
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="MaxHitPoints"]</xpath>
+			<value>
+				<parts>
+					<li Class="StatPart_Quality">
+						<factorAwful>0.5</factorAwful>
+						<factorPoor>0.75</factorPoor>
+						<factorNormal>1</factorNormal>
+						<factorGood>1.75</factorGood>
+						<factorExcellent>3</factorExcellent>
+						<factorMasterwork>6</factorMasterwork>
+						<factorLegendary>10</factorLegendary>
+					</li>
+				</parts>
+			</value>
+		</nomatch>
+		
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="MaxHitPoints"]/parts</xpath>
+			<value>
+				<li Class="StatPart_Quality">
+					<factorAwful>0.5</factorAwful>
+					<factorPoor>0.75</factorPoor>
+					<factorNormal>1</factorNormal>
+					<factorGood>1.75</factorGood>
+					<factorExcellent>3</factorExcellent>
+					<factorMasterwork>6</factorMasterwork>
+					<factorLegendary>10</factorLegendary>
+				</li>
+			</value>
+		</match>
+  </Operation>
+  
+</Patch>
+

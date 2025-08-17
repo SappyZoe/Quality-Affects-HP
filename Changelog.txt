@@ -1,0 +1,13 @@
+Convention (for now): Stuff before first Empty line should go on public changelist, stuff after is for myself.
+
+
+2024 06 21
+- Added 1.5 tag to about xml. (Comments on the mod said it's working fine)
+
+
+2022 12 15
+- Renamed mod from "German Quality" to "Quality Affects HP".
+- Minified things now have correct HP when created, this includes building that are uninstalled and art pieces created.
+- Added a safeguard that should reduce risk of mod incompatibility due to defs.
+
+- Added new Preview Image
