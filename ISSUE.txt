@@ -1,3 +1,6 @@
 
 Max HP xml patch is only applied on first tick, apparently, it is not applied when the game is paused when the item spawns.
 This was different in 1.5, there it spawned with the modified maxhp
+
+
+Git test edit 
