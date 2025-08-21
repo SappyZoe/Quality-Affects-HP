@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 
 using HarmonyLib;
+using HugsLib;
+using HugsLib.Settings;
+
 using RimWorld;
 using Verse;
 using Verse.Noise;
@@ -11,9 +14,110 @@ using Unity.Collections;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using System.Reflection;
+using System.Runtime;
 
 namespace GermanQualityLF
 {
+    /*
+    // Mod Settings without hugs ------------------------------------------------------------------------------------------------------
+    public class MyModSettings : ModSettings
+    {
+        public float awfulFactor = 0.5f;
+        public float poorFactor = 0.75f;
+        public float normalFactor = 1f;
+        public float goodFactor = 1.75f;
+        public float excellentFactor = 3f;
+        public float masterworkFactor = 6f;
+        public float legendaryFactor = 10f;
+
+
+        public override void ExposeData()
+        {
+            Scribe_Values.Look(ref awfulFactor, "awfulFactor", 0.5f);
+            Scribe_Values.Look(ref poorFactor, "poorFactor", 0.75f);
+            Scribe_Values.Look(ref normalFactor, "normalFactor", 1f);
+            Scribe_Values.Look(ref goodFactor, "goodFactor", 1.75f);
+            Scribe_Values.Look(ref excellentFactor, "excellentFactor", 3f);
+            Scribe_Values.Look(ref masterworkFactor, "masterworkFactor", 6f);
+            Scribe_Values.Look(ref legendaryFactor, "legendaryFactor", 10f);
+
+            base.ExposeData();
+        }
+    }
+
+    public class MyMod : Mod
+    {
+        public static MyModSettings settings;
+
+        public MyMod(ModContentPack content) : base(content)
+        {
+            settings = GetSettings<MyModSettings>();
+        }
+
+        //GUI
+        public override void DoSettingsWindowContents(Rect inRect)
+        {
+            Listing_Standard listingStandard = new Listing_Standard();
+            listingStandard.Begin(inRect);
+
+            //settings.awfulFactor = listingStandard.SliderLabeled("Awful Factor")
+
+            string testString = "a";
+
+            listingStandard.Label("Awful Factor NEW");
+            settings.awfulFactor = listingStandard.Slider(settings.awfulFactor, 0.1f, 1000f); // saved
+
+            listingStandard.TextFieldNumericLabeled<float>("awful Factor", ref settings.awfulFactor, ref testString, 0.1f, 1000f);
+            listingStandard.SubLabel(testString, 0.1f);
+            settings.poorFactor = listingStandard.SliderLabeled("testLabel", settings.poorFactor, 0.1f, 100f, 0.25f, "testTooltip");
+
+            string goodString = listingStandard.TextEntryLabeled("good Factor", "");
+
+            listingStandard.End();
+            base.DoSettingsWindowContents(inRect);
+        }
+        public override string SettingsCategory()
+        {
+            return "Quality Affects HP";
+        }
+    }
+
+    // \Mod Settings ------------------------------------------------------------------------------------------------------
+    */
+
+    // Mod Settings with Hugs ------------------------------------------------------------------------------------------------------
+
+    public class QAHPSettings : ModBase 
+    {
+	    public override string ModIdentifier 
+        {
+		    get { return "QAHPSettings"; }
+	    }
+
+	    private SettingHandle<float> awfulFactor;
+        private SettingHandle<float> poorFactor;
+        private SettingHandle<float> normalFactor;
+        private SettingHandle<float> goodFactor;
+        private SettingHandle<float> excellentFactor;
+        private SettingHandle<float> masterworkFactor;
+        private SettingHandle<float> legendaryFactor;
+
+        public override void DefsLoaded()
+        {
+            awfulFactor = Settings.GetHandle<float>("AwfulFactor", "Awful Factor", "Factor by which the vanilla HP is multiplied, for Awful Items", 0.5f);
+            poorFactor = Settings.GetHandle<float>("PoorFactor", "Poor Factor", "Factor by which the vanilla HP is multiplied, for Poor Items", 0.75f);
+            normalFactor = Settings.GetHandle<float>("NormalFactor", "Normal Factor", "Factor by which the vanilla HP is multiplied, for Normal Items", 1.0f);
+            goodFactor = Settings.GetHandle<float>("GoodFactor", "Good Factor", "Factor by which the vanilla HP is multiplied, for Good Items", 1.75f);
+            excellentFactor = Settings.GetHandle<float>("ExcellentFactor", "Excellent Factor", "Factor by which the vanilla HP is multiplied, for Excellent Items", 3f);
+            masterworkFactor = Settings.GetHandle<float>("MasterworkFactor", "Masterwork Factor", "Factor by which the vanilla HP is multiplied, for Masterwork Items", 6f);
+            legendaryFactor = Settings.GetHandle<float>("LegendaryFactor", "Legendary Factor", "Factor by which the vanilla HP is multiplied, for Legendary Items", 10f);
+        }
+    }
+
+
+    // \Mod Settings ------------------------------------------------------------------------------------------------------ 
+
 
     [StaticConstructorOnStartup]
     public static class GermanQualityLF
@@ -24,8 +128,64 @@ namespace GermanQualityLF
             // It's been renamed to "Quality Affects HP" player-facing.
 
             Log.Message("[Quality Affects HP] Mod initiated.");
+
+            //Log.Message("awfulFactor=" + MyMod.settings.awfulFactor);
+            //Log.Message("goodFactor=" + MyMod.settings.goodFactor);
+
+            ApplySettingsToDef();
+
             var harmony = new Harmony("com.Fluxilis.GermanQualityLF");
             harmony.PatchAll();
+        }
+
+        public static void ApplySettingsToDef()
+        {
+            bool appliedSettings = false;
+
+            Log.Message("XML EDITING SHENANIGANS START");
+
+
+            HugsLibController hlc = HugsLibController.Instance;
+            ModSettingsManager msm = hlc.Settings;
+            ModSettingsPack Settings = msm.GetModSettings("QAHPSettings");
+
+            float awfulFactor = Settings.GetHandle<float>("AwfulFactor", "Awful Factor", "Factor by which the vanilla HP is multiplied, for Awful Items", 0.5f);
+            float poorFactor = Settings.GetHandle<float>("PoorFactor", "Poor Factor", "Factor by which the vanilla HP is multiplied, for Poor Items", 0.75f);
+            float normalFactor = Settings.GetHandle<float>("NormalFactor", "Normal Factor", "Factor by which the vanilla HP is multiplied, for Normal Items", 1.0f);
+            float goodFactor = Settings.GetHandle<float>("GoodFactor", "Good Factor", "Factor by which the vanilla HP is multiplied, for Good Items", 1.75f);
+            float excellentFactor = Settings.GetHandle<float>("ExcellentFactor", "Excellent Factor", "Factor by which the vanilla HP is multiplied, for Excellent Items", 3f);
+            float masterworkFactor = Settings.GetHandle<float>("MasterworkFactor", "Masterwork Factor", "Factor by which the vanilla HP is multiplied, for Masterwork Items", 6f);
+            float legendaryFactor = Settings.GetHandle<float>("LegendaryFactor", "Legendary Factor", "Factor by which the vanilla HP is multiplied, for Legendary Items", 10f);
+
+
+            List<StatPart> parts = DefDatabase<StatDef>.GetNamed("MaxHitPoints").parts;
+
+            Log.Message($"{parts.Count} parts");
+            Log.Message(parts);
+
+            foreach (var part in parts)
+            {
+                if (part.GetType() == typeof(StatPart_Quality))
+                {
+                    appliedSettings = true;
+                    Log.Message("found quality StatPart");
+
+
+                    //float goodFactor = QAHPSettings.Settings.GetHandle<float>("AwfulFactor", "Awful Factor", "Factor by which the vanilla HP is multiplied, for Awful Items", 0.5f);
+
+                    typeof(StatPart_Quality).GetField("factorAwful", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(part, awfulFactor);
+                    typeof(StatPart_Quality).GetField("factorPoor", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(part, poorFactor);
+                    typeof(StatPart_Quality).GetField("factorNormal", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(part, normalFactor);
+                    typeof(StatPart_Quality).GetField("factorGood", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(part, goodFactor);
+                    typeof(StatPart_Quality).GetField("factorExcellent", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(part, excellentFactor);
+                    typeof(StatPart_Quality).GetField("factorMasterwork", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(part, masterworkFactor);
+                    typeof(StatPart_Quality).GetField("factorLegendary", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(part, legendaryFactor);
+
+                    Log.Message("Set Defs!");
+                }
+            }
+
+            if (!appliedSettings) { Log.Message("could not apply settings to Defs"); }
         }
     }
 
@@ -33,6 +193,32 @@ namespace GermanQualityLF
     {
         public static int CalculateQualityMaxHP(int basemax, QualityCategory quality)
         {
+            ModSettingsPack Settings = HugsLibController.Instance.Settings.GetModSettings("QAHPSettings");
+            string settingName = "";
+            switch (quality)
+            {
+                case QualityCategory.Awful: settingName = "AwfulFactor"; break;
+                case QualityCategory.Poor: settingName = "PoorFactor"; break;
+                case QualityCategory.Normal: settingName = "NormalFactor"; break;
+                case QualityCategory.Good: settingName = "GoodFactor"; break;
+                case QualityCategory.Excellent: settingName = "ExcellentFactor"; break;
+                case QualityCategory.Masterwork: settingName = "MasterworkFactor"; break;
+                case QualityCategory.Legendary: settingName = "LegendaryFactor"; break;
+            }
+            string value = Settings.PeekValue(settingName);
+            float factor = 1;
+
+            if (string.IsNullOrEmpty(value))
+            {
+                factor = Settings.GetHandle<float>(settingName);
+                Log.Message("peek value was empty. value="+value+" for settingName="+settingName+"factor="+factor);
+            }
+            else
+            { 
+                factor = float.Parse(value);
+            }
+
+            /*
             float factor = 1;
 
             switch (quality)
@@ -45,6 +231,7 @@ namespace GermanQualityLF
                 case QualityCategory.Masterwork: factor = 6f; break;
                 case QualityCategory.Legendary: factor = 10f; break;
             }
+            */
 
             float floatMax = basemax * factor;
             int newMax = (int)floatMax; //Mathf.RoundToInt(floatMax);
@@ -119,18 +306,18 @@ namespace GermanQualityLF
 
 
     // in Frame.CompleteConstruction(), l 346 sets hitpoints. we're already setting (Quality-affected-) hitpoints in setquality, so change it to:
-    // ONLY set hitpoints if compquality == null! (becuse if it isn't, we've set them already).
+    // ONLY set hitpoints if compquality == null! (because if it isn't, we've set them already).
     [HarmonyPatch(typeof(Frame), nameof(Frame.CompleteConstruction))]
     public static class Frame_CompleteConstruction_Patch
     {
-        [HarmonyTranspiler]
+    [HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator ilg)
         {
             //Log.Message("[Quality Affects HP] Transpiler called!");
 
             var instructionsList = instructions.ToList();
 
-            
+
             var newInstructions = new CodeInstruction[]
             {
                     new CodeInstruction(OpCodes.Ldloc_S, 11),
@@ -230,10 +417,10 @@ namespace GermanQualityLF
     }
 
 
-       
-    // Exception 1/? When things are minified with the uninstall option, they don't call SetQuality, so handle this here now.
-    [HarmonyPatch(typeof(MinifyUtility))]
-    [HarmonyPatch("MakeMinified")]
+
+// Exception 1/? When things are minified with the uninstall option, they don't call SetQuality, so handle this here now.
+[HarmonyPatch(typeof(MinifyUtility))]
+[HarmonyPatch("MakeMinified")]
     class MinifyHandler
     {
         static void Postfix(MinifiedThing __result)
@@ -286,6 +473,4 @@ namespace GermanQualityLF
             }
         }
     }
-        
-
 }

@@ -20,3 +20,6 @@ H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V25
 H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250813\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csproj.CoreCompileInputs.cache
 H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250813\Source\GermanQuality\GermanQuality\obj\Debug\GermanQu.6D0AAC34.Up2Date
 H:\Dropbox\Personal\Programming\Rimworld stuff\_my mods\QualityAffectsHP mod\V250813\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.dll
+C:\Projects\QualityAffectsHP\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csproj.AssemblyReference.cache
+C:\Projects\QualityAffectsHP\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.csproj.CoreCompileInputs.cache
+C:\Projects\QualityAffectsHP\Source\GermanQuality\GermanQuality\obj\Debug\GermanQuality.dll
